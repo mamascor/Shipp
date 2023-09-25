@@ -97,7 +97,7 @@ export default function Share() {
 
          <Button onClick={()=> {
             setIsShareOpen(true);
-         }} className="bg-[#30d5c8] text-white mt-6">Bump me up in line</Button>
+         }} className="bg-[#30d5c8] text-white mt-6 hover:text-black">Bump me up in line</Button>
        </div>
      </>
    );

@@ -19,7 +19,7 @@ import { FacebookShareButton } from "react-share";
 
 import { X } from "lucide-react";
 
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 
 import { useToast } from "@/components/ui/use-toast";
 
@@ -45,16 +45,12 @@ export default function Home() {
         title: "Looks like there was an error",
         description: "Please fill out all fields",
       });
-    }  else {
-        await joinWaitlist();
+    } else {
+      await joinWaitlist();
     }
-
-     
-  }
-
+  };
 
   const joinWaitlist = async () => {
-
     try {
       const res = await axios.post("/api/waitlist", signUpInfo);
 
@@ -63,13 +59,12 @@ export default function Home() {
         description: res.data.message,
       });
 
-       setSignUpInfo({
-         email: "",
-         city: "",
-       });
+      setSignUpInfo({
+        email: "",
+        city: "",
+      });
 
-       router.push("/share")
-
+      router.push("/share");
     } catch (error: any) {
       toast({
         title: "Looks like there was an error",
@@ -80,7 +75,6 @@ export default function Home() {
         email: "",
         city: "",
       });
-
     }
   };
 
@@ -117,17 +111,8 @@ export default function Home() {
             Meet someone IRL and get a drink
           </h1>
 
-          <FacebookShareButton
-            url={"https://shipp.app"}
-            quote="Online Dating Sucks. Meet someone IRL and get a drink"
-          >
-            <Button variant="ghost">Share on Facebook</Button>
-          </FacebookShareButton>
-
           <AlertDialog>
-            <AlertDialogTrigger 
-            
-            >
+            <AlertDialogTrigger>
               <h1 className="bg-[#30d5c8] text-white px-4 py-2 rounded m-12">
                 Get Started
               </h1>

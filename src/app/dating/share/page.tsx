@@ -95,9 +95,14 @@ export default function Share() {
 
          <h1>First 50 will be invited for early access event in October</h1>
 
-         <Button onClick={()=> {
-            setIsShareOpen(true);
-         }} className="bg-[#30d5c8] text-white mt-6 hover:text-black">Bump me up in line</Button>
+         <Button
+           onClick={() => {
+             setIsShareOpen(true);
+           }}
+           className="bg-[#30d5c8] text-white mt-6 hover:text-[#30d5c8]"
+         >
+           Bump me up in line
+         </Button>
        </div>
      </>
    );

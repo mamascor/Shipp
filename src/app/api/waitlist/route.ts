@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         {
           title: "Already in waitlist",
           message: "You are already in the waitlist",
-          redirect: `http://www.joinshipp.com/share?id=${matchingDoc?.id}`,
+          redirect: `http://www.joinshipp.com/dating/share?id=${matchingDoc?.id}`,
         },
         { status: 200 }
       );
@@ -71,7 +71,8 @@ export async function POST(request: NextRequest) {
       {
         title: "Thank you for joining the waitlist",
         message: isTop500Message,
-        redirect: `https://www.joinshipp.com/share?id=${matchingDocAfter?.id}`,
+        redirect: `https://www.joinshipp.com/dating/share?id=${matchingDocAfter?.id}&totalSignUps=${afterQuery.size}`,
+        totalSignUps: afterQuery.size,
       },
       { status: 200 }
     );

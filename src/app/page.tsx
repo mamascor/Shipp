@@ -57,6 +57,11 @@ export default function Home() {
     }
   };
 
+  function isValidEmail(email: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
   const joinWaitlist = async () => {
     try {
       const res = await axios.post("/api/waitlist", { signUpInfo, id });
@@ -133,7 +138,6 @@ export default function Home() {
                   Shipp is a dating app where you meet someone IRL for your
                   first conversation
                 </AlertDialogDescription>
-                
               </AlertDialogHeader>
 
               <Input
@@ -143,13 +147,16 @@ export default function Home() {
                   setSignUpInfo({ ...signUpInfo, email: e.target.value })
                 }
                 value={signUpInfo.email}
-
-                
               />
               <Input
                 placeholder="City"
                 onChange={(e) =>
-                  setSignUpInfo({ ...signUpInfo, city: e.target.value })
+                  setSignUpInfo({
+                    ...signUpInfo,
+                    city:
+                      e.target.value.charAt(0).toUpperCase() +
+                      e.target.value.slice(1),
+                  })
                 }
                 value={signUpInfo.city}
               />
@@ -157,7 +164,11 @@ export default function Home() {
                 <div className="w-full flex justify-between">
                   <AlertDialogAction
                     onClick={checkIfValid}
-                    disabled={signUpInfo.email === "" || signUpInfo.city === ""}
+                    disabled={
+                      signUpInfo.email === "" ||
+                      signUpInfo.city === "" ||
+                      !isValidEmail(signUpInfo.email)
+                    }
                     className="bg-[#30d5c8] text-white"
                   >
                     Join Waitlist
@@ -176,20 +187,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
-
-{
-  /* <div className="max-h-screen overflow-hidden relative bg-cover">
-  <Image
-    src={"/web.png"}
-    layout="fill"
-    objectFit="cover"
-    objectPosition="center"
-    alt="Two girls playing guitar"
-  />
-
-  <div className="aboslute w-full text-center ">
-   
-  </div>
-</div>; */
 }

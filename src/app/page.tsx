@@ -30,14 +30,21 @@ import { Button } from "@/components/ui/button";
 
 import axios from "axios";
 
+import { useSearchParams } from "next/navigation";
+
 export default function Home() {
   const { toast } = useToast();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [signUpInfo, setSignUpInfo] = React.useState({
     email: "",
     city: "",
   });
+
+  const id = searchParams.get("id");
+
+  console.log(id);
 
   const checkIfValid = async () => {
     if (signUpInfo.email === "" || signUpInfo.city === "") {
@@ -52,7 +59,7 @@ export default function Home() {
 
   const joinWaitlist = async () => {
     try {
-      const res = await axios.post("/api/waitlist", signUpInfo);
+      const res = await axios.post("/api/waitlist", { signUpInfo, id });
 
       toast({
         title: res.data.title,
@@ -64,7 +71,9 @@ export default function Home() {
         city: "",
       });
 
-      router.push("/share");
+      console.log();
+
+      router.push(res.data.redirect);
     } catch (error: any) {
       toast({
         title: "Looks like there was an error",
@@ -119,12 +128,12 @@ export default function Home() {
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Join the waitlist</AlertDialogTitle>
+                <AlertDialogTitle>Signup for early access</AlertDialogTitle>
                 <AlertDialogDescription>
-                  We are currently testing the app at University of North
-                  Carolina, We will notify you when we are ready to launch in
-                  your area.
+                  Shipp is a dating app where you meet someone IRL for your
+                  first conversation
                 </AlertDialogDescription>
+                
               </AlertDialogHeader>
 
               <Input
@@ -143,11 +152,11 @@ export default function Home() {
               />
               <AlertDialogFooter>
                 <div className="w-full flex justify-between">
-                  <AlertDialogCancel>
-                    <X size={24} />
-                  </AlertDialogCancel>
-
-                  <AlertDialogAction onClick={checkIfValid}>
+                  <AlertDialogAction
+                    onClick={checkIfValid}
+                    disabled={signUpInfo.email === "" || signUpInfo.city === ""}
+                    className="bg-[#30d5c8] text-white"
+                  >
                     Join Waitlist
                   </AlertDialogAction>
                 </div>

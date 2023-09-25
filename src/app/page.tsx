@@ -138,10 +138,13 @@ export default function Home() {
 
               <Input
                 placeholder="Email"
+                type="email"
                 onChange={(e) =>
                   setSignUpInfo({ ...signUpInfo, email: e.target.value })
                 }
                 value={signUpInfo.email}
+
+                
               />
               <Input
                 placeholder="City"

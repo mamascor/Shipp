@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
     await addDoc(collection(db, "waitlist"), {
       email,
       city,
+      createAt: new Date(),
     });
 
     const querySnapshot = await getDocs(collection(db, "waitlist"));

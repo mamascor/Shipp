@@ -112,7 +112,7 @@ export default function Share() {
            onClick={() => {
              setIsShareOpen(true);
            }}
-           className="bg-[#30d5c8] hover:bg-[#30d5c8]/50 text-white mt-6 hover:text-[#30d5c8]"
+           className="bg-[#30d5c8] hover:bg-[#30d5c8]/50 text-white mt-6 hover:text-black"
          >
            Bump me up in line
          </Button>

@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
     const { signUpInfo, id } = reqBody;
 
     const { email, city } = signUpInfo;
+    const ref = collection(db, "waitlist");
 
     //check if email is already in database
     const w_query = await getDocs(collection(db, "waitlist"));
@@ -29,12 +30,24 @@ export async function POST(request: NextRequest) {
 
     const matchingDoc = w_query.docs.find((doc) => doc.data().email === email);
 
+    const q_Snapshot = await getDocs(
+      query(collection(db, "waitlist"), orderBy("createAt"))
+    );
+
+    const m_Doc = q_Snapshot.docs.find((doc) => doc.data().email === email);
+
+    const placeInLine = matchingDoc
+      ? q_Snapshot.docs.findIndex((doc) => doc.id === matchingDoc.id) + 1
+      : 0; 
+
+    const behindYou = q_Snapshot.docs.slice(placeInLine);
+
     if (isEmailInDatabase) {
       return NextResponse.json(
         {
           title: "Already in waitlist",
           message: "You are already in the waitlist",
-          redirect: `http://www.joinshipp.com/dating/share?id=${matchingDoc?.id}?totalSignUps=${w_query.size}`,
+          redirect: `http://www.joinshipp.com/dating/share?id=${matchingDoc?.id}&totalSignUps=${w_query.size}&behing=${behindYou.length}`,
         },
         { status: 200 }
       );
@@ -61,17 +74,6 @@ export async function POST(request: NextRequest) {
       (doc) => doc.data().email === email
     );
 
-    const ref = collection(db, "cities");
-
-    const q = query(ref, orderBy("name"), limit(3));
-
-    const w_Doc = querySnapshot.docs.find((doc) => doc.data().email === email);
-
-    const placeInLine = querySnapshot.docs.findIndex((doc) => doc.id === w_Doc?.id) + 1;
-
-    const behindYou = querySnapshot.docs.slice(placeInLine, placeInLine + 3);
-
-
 
     if (id) {
       const querySnapshot = await getDocs(collection(db, "waitlist"));
@@ -92,7 +94,7 @@ export async function POST(request: NextRequest) {
       {
         title: "Thank you for joining the waitlist",
         message: isTop500Message,
-        redirect: `https://www.joinshipp.com/dating/share?id=${matchingDocAfter?.id}&totalSignUps=${afterQuery.size}?behind=${behindYou}`,
+        redirect: `https://www.joinshipp.com/dating/share?id=${matchingDocAfter?.id}&totalSignUps=${afterQuery.size}`,
         totalSignUps: afterQuery.size,
         placeInLine: afterQuery.size,
       },

@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
         {
           title: "Already in waitlist",
           message: "You are already in the waitlist",
-          redirect: `http://www.joinshipp.com/dating/share?id=${matchingDoc?.id}&totalSignUps=${w_query.size}&behing=${behindYou.length}`,
+          redirect: `http://www.joinshipp.com/dating/share?id=${matchingDoc?.id}&totalSignUps=${w_query.size}&behind=${behindYou.length}`,
         },
         { status: 200 }
       );

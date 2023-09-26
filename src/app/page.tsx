@@ -128,7 +128,7 @@ export default function Home() {
           <AlertDialog>
             <AlertDialogTrigger>
               <h1 className="bg-[#30d5c8] text-white px-4 py-2 rounded m-12">
-                Get Started
+                Join Waitlist
               </h1>
             </AlertDialogTrigger>
             <AlertDialogContent>
@@ -181,7 +181,7 @@ export default function Home() {
 
         <div className="fixed bottom-0 w-full bg-transparent text-white py-2 text-center">
           <p className="text-sm md:text-base font-light">
-            Actually discount off of a purchase at meetup location
+            Meet at partnered businesses for a discount on a purchase
           </p>
         </div>
       </div>

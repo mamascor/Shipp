@@ -11,6 +11,7 @@ import {
   
 } from "react-share";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Share() {
   const searchParams = useSearchParams();
@@ -18,6 +19,8 @@ export default function Share() {
   const [isShareOpen, setIsShareOpen] = React.useState(false);
 
   const id = searchParams.get("id");
+
+  const { toast } = useToast();
 
   const size = searchParams.get("totalSignUps");
 
@@ -36,6 +39,11 @@ export default function Share() {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(link);
+    toast({
+      title: "Copied to clipboard",
+      description: "Share with your friends",
+    });
+
   }
 
   

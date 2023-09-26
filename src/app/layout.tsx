@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 
-import { Inter, Montserrat } from 'next/font/google'
+import { Inter, Montserrat} from 'next/font/google'
 import { Toaster } from "@/components/ui/toaster";
 
 

@@ -24,11 +24,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <h1 className="text-xl">
             S<span className="text-[#30d5c8]">hi</span>pp
           </h1>
-          
+
         </header>
 
         <main className="space-y-3 flex-col flex justify-center items-center h-full">
-          <div className="bg-white p-12 text-black space-y-3 flex-col flex justify-center items-center">
+          <div className="bg-white p-12 text-black space-y-12 flex-col flex justify-center items-center">
             {children}
           </div>
         </main>

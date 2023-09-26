@@ -21,6 +21,8 @@ export default function Share() {
 
   const size = searchParams.get("totalSignUps");
 
+  const behind = searchParams.get("behind");
+
   console.log(size);
 
 
@@ -83,23 +85,34 @@ export default function Share() {
  } else if(size) {
    return (
      <>
-       <h1 className="text-2xl md:text-5xl font-light">{size}</h1>
-       <h1 className="text-md md:text-lg font-light">
-         people are ahead of you
-       </h1>
+       <div className="space-y-10">
+         <div>
+           <h1 className="text-2xl md:text-5xl font-bold">{size}</h1>
+           <h1 className="text-md md:text-lg font-light">
+             people are ahead of you
+           </h1>
+         </div>
 
-       <div className="mt-6">
-         <h1 className="text-md md:text-lg font-light">
+         {behind && (
+           <div>
+             <h1 className="text-2xl md:text-5xl font-bold">{behind}</h1>
+             <h1 className="text-md md:text-lg font-light">Behind</h1>
+           </div>
+         )}
+       </div>
+
+       <div className="mt-6 space-y-4">
+         <h1 className="text-xl md:text-lg font-light">
            First 1,000 will get invited to exclusive launch event.
          </h1>
 
-         <h1>First 50 will be invited for early access event in October</h1>
+         <h1 className="font-bold text-xl">First 50 will be invited for early access event in October</h1>
 
          <Button
            onClick={() => {
              setIsShareOpen(true);
            }}
-           className="bg-[#30d5c8] text-white mt-6 hover:text-[#30d5c8]"
+           className="bg-[#30d5c8] hover:bg-[#30d5c8]/50 text-white mt-6 hover:text-[#30d5c8]"
          >
            Bump me up in line
          </Button>

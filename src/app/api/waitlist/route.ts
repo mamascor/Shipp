@@ -11,7 +11,7 @@ import {
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/helpers/firebase/config";
 
-//add items to database
+
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     const { email, city } = signUpInfo;
     const ref = collection(db, "waitlist");
 
-    //check if email is already in database
+    // Check if email is already in the database
     const w_query = await getDocs(collection(db, "waitlist"));
     const emails = w_query.docs.map((doc) => doc.data().email);
 
@@ -34,15 +34,15 @@ export async function POST(request: NextRequest) {
       query(collection(db, "waitlist"), orderBy("createAt"))
     );
 
-    const m_Doc = q_Snapshot.docs.find((doc) => doc.data().email === email);
-
+    // Determine the user's place in line
     const placeInLine = matchingDoc
       ? q_Snapshot.docs.findIndex((doc) => doc.id === matchingDoc.id) + 1
-      : 0; 
+      : 0;
 
     const behindYou = q_Snapshot.docs.slice(placeInLine);
 
     if (isEmailInDatabase) {
+      // If the email is already in the database, return a response
       return NextResponse.json(
         {
           title: "Already in waitlist",
@@ -73,20 +73,36 @@ export async function POST(request: NextRequest) {
     const matchingDocAfter = afterQuery.docs.find(
       (doc) => doc.data().email === email
     );
-
+    
 
     if (id) {
-      const querySnapshot = await getDocs(collection(db, "waitlist"));
-      const matchingDoc = querySnapshot.docs.find((doc) => doc.id === id);
+      // Check if the provided "id" matches with any document in Firestore
+      const matchingDoc = afterQuery.docs.find((doc) => doc.id === id);
 
       // Check if a matching document was found
       if (matchingDoc) {
-        const docRef = doc(db, "waitlist", matchingDoc.id);
-
         // Update the "shares" field of the matching document by adding 1
-        await updateDoc(docRef, {
+        await updateDoc(matchingDoc.ref, {
           shares: matchingDoc.data().shares + 1,
         });
+
+        // Re-query the Firestore collection to get the updated position
+        const updatedQuery = await getDocs(collection(db, "waitlist"));
+        const updatedMatchingDoc = updatedQuery.docs.find(
+          (doc) => doc.id === id
+        );
+
+        return NextResponse.json(
+          {
+            title: "Thank you for joining the waitlist",
+            message: isTop500Message,
+            redirect: `https://www.joinshipp.com/dating/share?id=${updatedMatchingDoc?.id}&totalSignUps=${updatedQuery.size}`,
+            totalSignUps: updatedQuery.size,
+            placeInLine:
+              updatedQuery.docs.findIndex((doc) => doc.id === id) + 1,
+          },
+          { status: 200 }
+        );
       }
     }
 

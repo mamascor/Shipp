@@ -122,7 +122,8 @@ export default function Home() {
             Online Dating Sucks.
           </h1>
           <h1 className="text-2xl md:text-5xl  font-bold">
-            Meet someone IRL and get a drink
+            Meet someone <span className="text-[#30d5c8]">IRL</span> and get a
+            drink
           </h1>
 
           <AlertDialog>

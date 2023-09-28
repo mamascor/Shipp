@@ -181,7 +181,7 @@ export default function Home() {
         </main>
 
         <div className="fixed bottom-0 w-full bg-transparent text-white py-2 text-center">
-          <p className="text-sm md:text-base font-light">
+          <p className="text-sm md:text-base font-bold">
             Meet at partnered businesses for a discount on a purchase
           </p>
         </div>

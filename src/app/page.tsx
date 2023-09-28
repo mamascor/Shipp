@@ -118,10 +118,10 @@ export default function Home() {
         </header>
 
         <main className="space-y-3 flex-col flex justify-center items-center h-full">
-          <h1 className="text-2xl md:text-5xl font-light">
+          <h1 className="text-2xl md:text-5xl font-bold">
             Online Dating Sucks.
           </h1>
-          <h1 className="text-2xl md:text-5xl font-light">
+          <h1 className="text-2xl md:text-5xl  font-bold">
             Meet someone IRL and get a drink
           </h1>
 

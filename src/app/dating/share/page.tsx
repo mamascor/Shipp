@@ -28,8 +28,7 @@ export default function Share() {
 
   const fb_url = `https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost:3000?id=${id}`;
 
-  const twitterText =
-    "Hey! This new dating app solves your frustrations 👀. You should sign up for early access!";
+  const twitterText =  "Dating apps suck. But this new dating app, Shipp, gets to the point of meeting people IRL. Singles out there should sign up for early access!";
   const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)} %0A${link}`;
 
   //make a variable for the link to share if id is not return one otherwise return the default link

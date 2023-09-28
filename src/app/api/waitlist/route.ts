@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
       if (matchingDoc) {
         // Update the "shares" field of the matching document by adding 1
         await updateDoc(matchingDoc.ref, {
-          shares: matchingDoc.data().shares - 1 || 0,
+          shares: matchingDoc.data().shares - 1,
         });
 
         // Re-query the Firestore collection to get the updated position
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
             redirect: `https://www.joinshipp.com/dating/share?id=${updatedMatchingDoc?.id}&totalSignUps=${updatedQuery.size}`,
             totalSignUps: updatedQuery.size,
             placeInLine:
-              updatedQuery.docs.findIndex((doc) => doc.id === id) - 1 || 0,
+              updatedQuery.docs.findIndex((doc) => doc.id === id) - 1,
           },
           { status: 200 }
         );

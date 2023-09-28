@@ -93,7 +93,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative h-screen max-h-screen overflow-hidden">
+    <div className="relative h-screen max-h-screen overflow-hidden text-white">
       <Image
         src="/web.png"
         layout="fill"

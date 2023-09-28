@@ -21,7 +21,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       />
       <div className="absolute h-screen  w-full text-center">
         <header className="flex justify-center bg-transparent">
-          <h1 className="text-xl">
+          <h1 className="text-5xl font-bold">
             S<span className="text-[#30d5c8]">hi</span>pp
           </h1>
 

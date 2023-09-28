@@ -111,7 +111,7 @@ export default function Home() {
       />
       <div className="absolute h-screen  w-full text-center">
         <header className="flex justify-center bg-transparent">
-          <h1 className="text-xl">
+          <h1 className="text-5xl font-bold">
             S<span className="text-[#30d5c8]">hi</span>pp
           </h1>
           <Separator orientation="vertical" />
@@ -127,7 +127,7 @@ export default function Home() {
 
           <AlertDialog>
             <AlertDialogTrigger>
-              <h1 className="bg-[#30d5c8] text-white px-4 py-2 rounded m-12">
+              <h1 className="bg-[#30d5c8] text-2xl text-white  px-4 py-2 rounded m-12">
                 Join Waitlist
               </h1>
             </AlertDialogTrigger>
